@@ -88,7 +88,11 @@ launch_fio()
         touch ${RESULT_PATH}/fio-${t}-pass-${COUNTER}
         echo -n ${TEST_NAME} > ${RESULT_PATH}/NAME
         #Drop caches
-        echo 3 > /proc/sys/vm/drop_caches
+        if [ -w /proc/sys/vm/drop_caches ]; then
+            echo 3 > /proc/sys/vm/drop_caches
+        elif
+            echo "unable to clear caches"
+        fi
         fio --output=${RESULT_PATH}/fio-${t}-pass-${COUNTER} ./enabled-tests/${t}
       log ""
     done
