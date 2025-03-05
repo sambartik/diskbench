@@ -90,7 +90,7 @@ launch_fio()
         #Drop caches
         if [ -w /proc/sys/vm/drop_caches ]; then
             echo 3 > /proc/sys/vm/drop_caches
-        elif
+        else
             echo "unable to clear caches"
         fi
         fio --output=${RESULT_PATH}/fio-${t}-pass-${COUNTER} ./enabled-tests/${t}
